@@ -5,3 +5,6 @@ package SDK;
  */
 public class ServerConnection {
 }
+
+
+//class for connecting to server. will include get and push message
