@@ -6,9 +6,6 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-/**
- * Created by Oscar on 30-10-2015.
- */
 public class PlaySnakePanel extends JPanel {
     private JLabel lblPlaySnake;
     private JButton btnCreateGame;
