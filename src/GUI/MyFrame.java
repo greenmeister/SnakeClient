@@ -24,6 +24,7 @@ public class MyFrame extends JFrame {
     private HighScorePanel highScorePanel;
     private PlaySnakePanel playSnakePanel;
     private JoinGamePanel joinGamePanel;
+    private CreateGamePanel createGamePanel;
     private CardLayout c;
     private JPanel contentPane;
 
@@ -55,6 +56,9 @@ public class MyFrame extends JFrame {
 
         joinGamePanel = new JoinGamePanel();
         contentPane.add(joinGamePanel, JOIN);
+
+        createGamePanel = new CreateGamePanel();
+        contentPane.add(createGamePanel, CREATE);
 
 
 
@@ -89,6 +93,8 @@ public class MyFrame extends JFrame {
         return joinGamePanel;}
     public LoginPanel getLoginPanel() {
         return loginPanel;}
+    public CreateGamePanel getCreateGamePanel(){
+        return createGamePanel;}
 
 
 }
