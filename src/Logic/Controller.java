@@ -3,6 +3,8 @@ package Logic;
 import GUI.*;
 import com.sun.jersey.api.client.ClientResponse;
 import SDK.User;
+import SDK.Gamer;
+import SDK.Game;
 import com.google.gson.Gson;
 import SDK.ServerConnection;
 import javax.swing.*;
@@ -16,6 +18,7 @@ import java.awt.event.ActionListener;
 public class Controller {
 
     private MyFrame myFrame;
+    private User LoggedInUser;
 
 
     public Controller() {
@@ -34,6 +37,8 @@ public class Controller {
         myFrame.getHighScorePanel().addActionListener(new HighScorePanelActionListener());
         myFrame.getPlaySnakePanel().addActionListener(new PlaySnakePanelActionListener());
         myFrame.getJoinGamePanel().addActionListener(new JoinGamePanelActionListener());
+        myFrame.getCreateGamePanel().addActionListener(new CreateGamePanelActionListener());
+
         myFrame.show(myFrame.LOGIN);
     }
 
@@ -50,12 +55,12 @@ public class Controller {
                 System.out.println(password);
 
 
-                User user = new User(username, password);
-                user.setPassword(password);
-                user.setUsername(username);
+                LoggedInUser = new User();
+                LoggedInUser.setPassword(password);
+                LoggedInUser.setUsername(username);
 
-                String json = new Gson().toJson(user);
-                System.out.println(json);
+
+                String json = new Gson().toJson(LoggedInUser);
 
 
                 ServerConnection con = new ServerConnection();
@@ -75,7 +80,7 @@ public class Controller {
 
                     authenticated = false;
                     System.out.println("Bad request");
-                    JOptionPane.showMessageDialog(myFrame, "The request could not be understood by the server due to malformed syntax");
+                    JOptionPane.showMessageDialog(myFrame, "The server did not understand the request");
                     myFrame.getLoginPanel().getTxtFieldUser().setText("");
                     myFrame.getLoginPanel().getTxtFieldPw().setText("");
                     myFrame.show(myFrame.LOGIN);
@@ -141,7 +146,6 @@ public class Controller {
                     int gameID = myFrame.getDeleteGamePanel().getGameID();
 
 
-
                     if (gameID != 0) {
 
 
@@ -195,8 +199,7 @@ public class Controller {
             }
             if (event.getSource() == myFrame.getPlaySnakePanel().getBtnCreateGame()) {
                 myFrame.show(MyFrame.CREATE);
-            }
-            else if (event.getSource() == myFrame.getPlaySnakePanel().getBtnBack()) {
+            } else if (event.getSource() == myFrame.getPlaySnakePanel().getBtnBack()) {
 
                 myFrame.show(myFrame.MENU);
 
@@ -215,11 +218,62 @@ public class Controller {
 
     }
 
+    private class CreateGamePanelActionListener implements ActionListener {
 
+
+        public void actionPerformed(ActionEvent event) {
+            if (event.getSource() == myFrame.getCreateGamePanel().getBtnHowToPlay()) {
+
+                JOptionPane.showMessageDialog(myFrame, "Press W,A,S,D buttons to insert your game controls. \n" +
+                        "W corresponds to one movement up with your snake \n" +
+                        "A corresponds to one movement to the left with your snake.\n" +
+                        "S corresponds to one movement down with you snake.\n" +
+                        "D corresponds to one movement to the right with your snake \n" +
+                        "Mapsize shall be a number");
+            }
+            if (event.getSource() == myFrame.getCreateGamePanel().getBtnCreate()) {
+
+
+                int mapSize = myFrame.getCreateGamePanel().getTextMapSize();
+                String controls = myFrame.getCreateGamePanel().getTextGameControls();
+                String GameName = myFrame.getCreateGamePanel().getTextName();
+
+
+                if (mapSize != 0 && !controls.equals("")) {
+
+                    Gamer host = new Gamer();
+                    host.setId(LoggedInUser.getId());
+                    host.setControls(controls);
+
+                    Game game = new Game();
+                    game.setName(GameName);
+                    game.setMapSize(mapSize);
+                    game.setHost(host);
+
+
+                    String json = new Gson().toJson(game);
+
+                    ServerConnection con = new ServerConnection();
+                    ClientResponse response = con.post(json, "games");
+
+                    System.out.println(json);
+
+                    if (response.getStatus() == 201) {
+                        JOptionPane.showMessageDialog(myFrame, "Game Created! Your game ID is :" + host.getId());
+                        myFrame.show(myFrame.MENU);
+
+                    }
+                }
+
+            } else if (event.getSource() == myFrame.getCreateGamePanel().getBtnBack()) {
+
+                myFrame.show(myFrame.MENU);
 
 
             }
-
+        }
+    }
+}
 
 
 
