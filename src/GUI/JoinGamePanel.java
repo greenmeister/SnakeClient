@@ -1,7 +1,10 @@
 package GUI;
 
 import javax.swing.*;
+
+import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 /**
@@ -11,9 +14,11 @@ import java.awt.event.ActionListener;
 public class JoinGamePanel extends JPanel {
     private JLabel lblJoinGame;
     private JLabel lblSearchForGame;
+    private JLabel lblControls;
     private JButton btnJoinGame;
     private JButton btnBack;
     private JTextField  textFieldGameID;
+    private JTextField textFieldControls;
 
     /**
      * Create the panel.
@@ -24,24 +29,37 @@ public class JoinGamePanel extends JPanel {
         setLayout(null);
 
         lblJoinGame = new JLabel("JOIN GAME");
-        lblJoinGame.setBounds(164, 6, 68, 33);
+        lblJoinGame.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblJoinGame.setBounds(268, 6, 83, 33);
         add(lblJoinGame);
 
         textFieldGameID = new JTextField();
-        textFieldGameID.setBounds(53, 115, 179, 34);
+        textFieldGameID.setBounds(223, 116, 179, 34);
         add(textFieldGameID);
+
+        lblControls = new JLabel("Insert Your Game controls");
+        lblControls.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblControls.setBounds(18, 189, 193, 33);
+        add(lblControls);
+
+        textFieldControls = new JTextField();
+        textFieldControls.setBounds(223, 188, 179, 34);
+        add(textFieldControls);
 
 
         lblSearchForGame = new JLabel("Search for game by ID");
-        lblSearchForGame.setBounds(39, 70, 144, 33);
+        lblSearchForGame.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblSearchForGame.setBounds(18, 117, 193, 33);
         add(lblSearchForGame);
 
+
         btnJoinGame = new JButton("Join game");
-        btnJoinGame.setBounds(124, 219, 171, 41);
+        btnJoinGame.setBounds(223, 292, 179, 41);
         add(btnJoinGame);
 
         btnBack = new JButton("Back");
-        btnBack.setBounds(124, 319, 171, 39);
+        btnBack.addActionListener(new BtnBackActionListener());
+        btnBack.setBounds(223, 493, 179, 39);
         add(btnBack);
 
     }
@@ -62,4 +80,8 @@ public class JoinGamePanel extends JPanel {
     }
 
 
+    private class BtnBackActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+        }
     }
+}

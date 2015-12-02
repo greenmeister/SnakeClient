@@ -49,7 +49,6 @@ import java.io.IOException;
 
 
         btnLogin = new JButton("Login");
-        btnLogin.setFont(new Font("Lucida Grande", Font.BOLD, 16));
         btnLogin.setBounds(215, 438, 262, 41);
         add(btnLogin);
 

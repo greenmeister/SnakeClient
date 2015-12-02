@@ -83,6 +83,7 @@ public class MyFrame extends JFrame {
     public DeleteGamePanel getDeleteGamePanel() {
         return deleteGamePanel;
     }
+
     public HighScorePanel getHighScorePanel(){
         return highScorePanel;
     }

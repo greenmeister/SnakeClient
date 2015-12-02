@@ -32,12 +32,13 @@ public class DeleteGamePanel extends JPanel {
         setSize(700, 550);
 
         lblDeleteGame = new JLabel("DELETE GAME");
-        lblDeleteGame.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+        lblDeleteGame.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblDeleteGame.setBounds(297, 49, 127, 33);
         add(lblDeleteGame);
 
         lblInsertGameId = new JLabel("Please type Game ID to Delete Game");
-        lblInsertGameId.setBounds(243, 133, 236, 33);
+        lblInsertGameId.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblInsertGameId.setBounds(232, 132, 263, 33);
         add(lblInsertGameId);
 
         gameID = new JTextField();

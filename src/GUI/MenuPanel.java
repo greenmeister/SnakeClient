@@ -3,6 +3,7 @@ package GUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -14,7 +15,6 @@ import java.io.IOException;
 
 public class MenuPanel extends JPanel {
 
-    private JLabel lblMenu;
     private JButton btnPlaySnake;
     private JButton btnHighscores;
     private JButton btnDeleteGame;
@@ -30,9 +30,6 @@ public class MenuPanel extends JPanel {
         setLayout(null);
         setSize(700, 550);
 
-        lblMenu = new JLabel("WELCOME TO THE SNAKE MENU");
-        lblMenu.setBounds(230, 6, 204, 33);
-        add(lblMenu);
 
         btnPlaySnake = new JButton("Play Snake");
         btnPlaySnake.setBounds(208, 142, 255, 41);
