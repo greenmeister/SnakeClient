@@ -58,7 +58,6 @@ public class JoinGamePanel extends JPanel {
         add(btnJoinGame);
 
         btnBack = new JButton("Back");
-        btnBack.addActionListener(new BtnBackActionListener());
         btnBack.setBounds(223, 493, 179, 39);
         add(btnBack);
 
@@ -80,8 +79,6 @@ public class JoinGamePanel extends JPanel {
     }
 
 
-    private class BtnBackActionListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-        }
+
     }
-}
+
