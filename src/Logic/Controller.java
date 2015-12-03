@@ -19,6 +19,7 @@ public class Controller {
 
     private MyFrame myFrame;
     private User LoggedInUser;
+    private ServerConnection con = new ServerConnection();
 
 
     public Controller() {
@@ -43,7 +44,6 @@ public class Controller {
     }
 
     private class LoginPanelActionListener implements ActionListener {
-        boolean authenticated = false;
 
 
         public void actionPerformed(ActionEvent event) {
@@ -52,7 +52,6 @@ public class Controller {
 
                 String username = myFrame.getLoginPanel().getTxtFieldUser().getText();
                 String password = myFrame.getLoginPanel().getTxtFieldPw().getText();
-                System.out.println(password);
 
 
                 LoggedInUser = new User();
@@ -63,43 +62,16 @@ public class Controller {
                 String json = new Gson().toJson(LoggedInUser);
 
 
-                ServerConnection con = new ServerConnection();
-                ClientResponse response = con.post(json, "login");
+                String response = con.post(json, "login/");
+                LoggedInUser.setId(new Gson().fromJson(response.toString(), User.class).getUserid());
 
-
-                if (response.getStatus() == 200) {
-                    authenticated = true;
-                    System.out.println("User validated");
-                    JOptionPane.showMessageDialog(myFrame, "Successful Login");
-                    myFrame.getLoginPanel().getTxtFieldUser().setText("");
-                    myFrame.getLoginPanel().getTxtFieldPw().setText("");
-                    myFrame.show(myFrame.MENU);
-
-                }
-                if (response.getStatus() == 500) {
-
-                    authenticated = false;
-                    System.out.println("Bad request");
-                    JOptionPane.showMessageDialog(myFrame, "The server did not understand the request");
-                    myFrame.getLoginPanel().getTxtFieldUser().setText("");
-                    myFrame.getLoginPanel().getTxtFieldPw().setText("");
-                    myFrame.show(myFrame.LOGIN);
-
-
-                }
-                if (response.getStatus() == 401) {
-
-                    authenticated = false;
-                    System.out.println("Unauthorized");
-                    JOptionPane.showMessageDialog(myFrame, "User could not be authorized");
-                    myFrame.getLoginPanel().getTxtFieldUser().setText("");
-                    myFrame.getLoginPanel().getTxtFieldPw().setText("");
-                    myFrame.show(myFrame.LOGIN);
-
-
-                }
+                JOptionPane.showMessageDialog(myFrame, "Successful Login");
+                myFrame.getLoginPanel().getTxtFieldUser().setText("");
+                myFrame.getLoginPanel().getTxtFieldPw().setText("");
+                myFrame.show(myFrame.MENU);
 
             }
+
         }
     }
 
@@ -192,6 +164,16 @@ public class Controller {
     private class PlaySnakePanelActionListener implements ActionListener {
 
         public void actionPerformed(ActionEvent event) {
+            if (event.getSource() == myFrame.getPlaySnakePanel().getBtnHowToPlay()) {
+
+                JOptionPane.showMessageDialog(myFrame, "Press W,A,S,D buttons to insert your game controls. \n" +
+                        "W corresponds to one movement up with your snake \n" +
+                        "A corresponds to one movement to the left with your snake.\n" +
+                        "S corresponds to one movement down with you snake.\n" +
+                        "D corresponds to one movement to the right with your snake \n" +
+                        "Mapsize shall be a number");
+            }
+
             if (event.getSource() == myFrame.getPlaySnakePanel().getBtnJoinGame()) {
 
                 myFrame.show(myFrame.JOIN);
@@ -199,6 +181,7 @@ public class Controller {
             }
             if (event.getSource() == myFrame.getPlaySnakePanel().getBtnCreateGame()) {
                 myFrame.show(MyFrame.CREATE);
+
             } else if (event.getSource() == myFrame.getPlaySnakePanel().getBtnBack()) {
 
                 myFrame.show(myFrame.MENU);
@@ -210,27 +193,45 @@ public class Controller {
     private class JoinGamePanelActionListener implements ActionListener {
 
         public void actionPerformed(ActionEvent event) {
-            if (event.getSource() == myFrame.getJoinGamePanel().getBtnBack()) {
+            if (event.getSource() == myFrame.getJoinGamePanel().getBtnJoinGame()) {
 
-                myFrame.show(myFrame.PLAY);
+                String controls = myFrame.getJoinGamePanel().getTextFieldOppControls();
+                int gameID = myFrame.getJoinGamePanel().getTextFieldGameID();
+
+                if (gameID != 0 && !controls.equals("")) {
+
+
+                    Gamer opponent = new Gamer();
+                    opponent.setId(LoggedInUser.getId());
+                    opponent.setControls(controls);
+
+                    Game game = new Game();
+                    game.setOpponent(opponent);
+                    game.setGameId(gameID);
+
+                    String json = new Gson().toJson(game);
+                    ServerConnection con = new ServerConnection();
+                    String response = con.post(json, "games");
+
+
+
+
+
+
+                    myFrame.show(myFrame.PLAY);
+
+
+                }
             }
-        }
 
+        }
     }
 
     private class CreateGamePanelActionListener implements ActionListener {
 
 
         public void actionPerformed(ActionEvent event) {
-            if (event.getSource() == myFrame.getCreateGamePanel().getBtnHowToPlay()) {
 
-                JOptionPane.showMessageDialog(myFrame, "Press W,A,S,D buttons to insert your game controls. \n" +
-                        "W corresponds to one movement up with your snake \n" +
-                        "A corresponds to one movement to the left with your snake.\n" +
-                        "S corresponds to one movement down with you snake.\n" +
-                        "D corresponds to one movement to the right with your snake \n" +
-                        "Mapsize shall be a number");
-            }
             if (event.getSource() == myFrame.getCreateGamePanel().getBtnCreate()) {
 
 
@@ -254,20 +255,17 @@ public class Controller {
                     String json = new Gson().toJson(game);
 
                     ServerConnection con = new ServerConnection();
-                    ClientResponse response = con.post(json, "games");
+                    String response = con.post(json, "games");
 
                     System.out.println(json);
 
-                    if (response.getStatus() == 201) {
-                        JOptionPane.showMessageDialog(myFrame, "Game Created! Your game ID is :" + host.getId());
-                        myFrame.show(myFrame.MENU);
 
                     }
-                }
+
 
             } else if (event.getSource() == myFrame.getCreateGamePanel().getBtnBack()) {
 
-                myFrame.show(myFrame.MENU);
+                myFrame.show(myFrame.PLAY);
 
 
             }

@@ -18,7 +18,7 @@ public class JoinGamePanel extends JPanel {
     private JButton btnJoinGame;
     private JButton btnBack;
     private JTextField  textFieldGameID;
-    private JTextField textFieldControls;
+    private JTextField textFieldOppControls;
 
     /**
      * Create the panel.
@@ -42,9 +42,9 @@ public class JoinGamePanel extends JPanel {
         lblControls.setBounds(18, 189, 193, 33);
         add(lblControls);
 
-        textFieldControls = new JTextField();
-        textFieldControls.setBounds(223, 188, 179, 34);
-        add(textFieldControls);
+        textFieldOppControls = new JTextField();
+        textFieldOppControls.setBounds(223, 188, 179, 34);
+        add(textFieldOppControls);
 
 
         lblSearchForGame = new JLabel("Search for game by ID");
@@ -70,6 +70,16 @@ public class JoinGamePanel extends JPanel {
     public JButton getBtnJoinGame() {
         return btnJoinGame;
     }
+
+    public String getTextFieldOppControls() {
+        return textFieldOppControls.getText();}
+
+    public int getTextFieldGameID() {
+        return Integer.parseInt(textFieldGameID.getText());
+
+    }
+
+
 
 
     public void addActionListener(ActionListener event){

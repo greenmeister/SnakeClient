@@ -22,6 +22,9 @@ public class User {
     private int type;
     public User () {}
 
+    private int userid;
+
+
     //creating get and set method for all the variables, so they can be used by other classes
 
 
@@ -95,6 +98,10 @@ public class User {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getUserid() {
+        return userid;
     }
 
 
