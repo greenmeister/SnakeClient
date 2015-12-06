@@ -1,30 +1,27 @@
 package Logic;
 
 import GUI.*;
-import com.sun.jersey.api.client.ClientResponse;
-import SDK.User;
-import SDK.Gamer;
-import SDK.Game;
-import com.google.gson.Gson;
-import SDK.ServerConnection;
+import SDK.*;
+
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-/**
- * Created by Greenmeister on 05/11/15.
- */
+
+
 public class Controller {
 
     private MyFrame myFrame;
-    private User LoggedInUser;
     private ServerConnection con = new ServerConnection();
+    private Methods method;
 
 
     public Controller() {
 
         myFrame = new MyFrame();
+        method = new Methods();
 
 
     }
@@ -40,6 +37,7 @@ public class Controller {
         myFrame.getJoinGamePanel().addActionListener(new JoinGamePanelActionListener());
         myFrame.getCreateGamePanel().addActionListener(new CreateGamePanelActionListener());
 
+
         myFrame.show(myFrame.LOGIN);
     }
 
@@ -54,24 +52,20 @@ public class Controller {
                 String password = myFrame.getLoginPanel().getTxtFieldPw().getText();
 
 
-                LoggedInUser = new User();
-                LoggedInUser.setPassword(password);
-                LoggedInUser.setUsername(username);
+                method.login(username, password);
 
-
-                String json = new Gson().toJson(LoggedInUser);
-
-
-                String response = con.post(json, "login/");
-                LoggedInUser.setId(new Gson().fromJson(response.toString(), User.class).getUserid());
 
                 JOptionPane.showMessageDialog(myFrame, "Successful Login");
                 myFrame.getLoginPanel().getTxtFieldUser().setText("");
                 myFrame.getLoginPanel().getTxtFieldPw().setText("");
                 myFrame.show(myFrame.MENU);
 
-            }
+            } else {
+                JOptionPane.showMessageDialog(myFrame, "Login failed");
+                myFrame.getLoginPanel().getTxtFieldUser().setText("");
+                myFrame.getLoginPanel().getTxtFieldPw().setText("");
 
+            }
         }
     }
 
@@ -87,7 +81,9 @@ public class Controller {
             } else if (event.getSource() == myFrame.getMenuPanel().getBtnHighscores()) {
 
 
-                myFrame.show(myFrame.HIGHSCORE);
+                myFrame.show(MyFrame.HIGHSCORE);
+
+
 
 
             } else if (event.getSource() == myFrame.getMenuPanel().getBtnLogout()) {
@@ -121,26 +117,8 @@ public class Controller {
                     if (gameID != 0) {
 
 
-                        ServerConnection con = new ServerConnection();
-                        ClientResponse response = con.delete("games/" + gameID);
-
-                        if (response.getStatus() == 200) {
-                            System.out.println("Game deleted");
-                            JOptionPane.showMessageDialog(myFrame, "Game was deleted");
-                            myFrame.show(myFrame.DELETE);
-                        }
-
-                        if (response.getStatus() == 400) {
-                            System.out.println("Game not deleted");
-                            JOptionPane.showMessageDialog(myFrame, "Invalid ID - Game not deleted");
-                            myFrame.show(myFrame.DELETE);
-
-
-                            System.out.println(response.getStatus());
-
-                        }
+                        method.deleteGame(gameID);
                     }
-
 
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(myFrame, "ID Must consist of numbers",
@@ -156,10 +134,12 @@ public class Controller {
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == myFrame.getHighScorePanel().getBtnBack()) {
 
+
                 myFrame.show(myFrame.MENU);
             }
         }
     }
+
 
     private class PlaySnakePanelActionListener implements ActionListener {
 
@@ -180,6 +160,7 @@ public class Controller {
 
             }
             if (event.getSource() == myFrame.getPlaySnakePanel().getBtnCreateGame()) {
+
                 myFrame.show(MyFrame.CREATE);
 
             } else if (event.getSource() == myFrame.getPlaySnakePanel().getBtnBack()) {
@@ -190,88 +171,80 @@ public class Controller {
         }
     }
 
+
+
+
     private class JoinGamePanelActionListener implements ActionListener {
 
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == myFrame.getJoinGamePanel().getBtnJoinGame()) {
 
-                String controls = myFrame.getJoinGamePanel().getTextFieldOppControls();
-                int gameID = myFrame.getJoinGamePanel().getTextFieldGameID();
 
-                if (gameID != 0 && !controls.equals("")) {
+                try {
 
 
-                    Gamer opponent = new Gamer();
-                    opponent.setId(LoggedInUser.getId());
-                    opponent.setControls(controls);
+                    int gameID = myFrame.getJoinGamePanel().getTextFieldGameID();
+                    String oppControls = myFrame.getJoinGamePanel().getTextFieldOppControls();
 
-                    Game game = new Game();
-                    game.setOpponent(opponent);
-                    game.setGameId(gameID);
+                    if (gameID != 0 && !oppControls.equals("")) {
 
-                    String json = new Gson().toJson(game);
-                    ServerConnection con = new ServerConnection();
-                    String response = con.post(json, "games");
-
-
-
-
-
-
-                    myFrame.show(myFrame.PLAY);
-
-
-                }
-            }
-
-        }
-    }
-
-    private class CreateGamePanelActionListener implements ActionListener {
-
-
-        public void actionPerformed(ActionEvent event) {
-
-            if (event.getSource() == myFrame.getCreateGamePanel().getBtnCreate()) {
-
-
-                int mapSize = myFrame.getCreateGamePanel().getTextMapSize();
-                String controls = myFrame.getCreateGamePanel().getTextGameControls();
-                String GameName = myFrame.getCreateGamePanel().getTextName();
-
-
-                if (mapSize != 0 && !controls.equals("")) {
-
-                    Gamer host = new Gamer();
-                    host.setId(LoggedInUser.getId());
-                    host.setControls(controls);
-
-                    Game game = new Game();
-                    game.setName(GameName);
-                    game.setMapSize(mapSize);
-                    game.setHost(host);
-
-
-                    String json = new Gson().toJson(game);
-
-                    ServerConnection con = new ServerConnection();
-                    String response = con.post(json, "games");
-
-                    System.out.println(json);
+                        method.joinGame(gameID, oppControls);
 
 
                     }
 
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(myFrame, "ID Must consist of numbers",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else if (event.getSource() == myFrame.getJoinGamePanel().getBtnBack()) {
 
-            } else if (event.getSource() == myFrame.getCreateGamePanel().getBtnBack()) {
-
-                myFrame.show(myFrame.PLAY);
-
+                myFrame.show(myFrame.MENU);
 
             }
         }
     }
-}
+
+
+        private class CreateGamePanelActionListener implements ActionListener {
+
+
+            public void actionPerformed(ActionEvent event) {
+
+                if (event.getSource() == myFrame.getCreateGamePanel().getBtnCreate()) {
+
+
+                        int mapSize = myFrame.getCreateGamePanel().getTextMapSize();
+                        String controls = myFrame.getCreateGamePanel().getTextGameControls();
+                        String GameName = myFrame.getCreateGamePanel().getTextName();
+
+
+                        if (mapSize != 0 && !controls.equals("")) {
+
+
+                            method.createGame(controls, GameName, mapSize);
+
+
+                            JOptionPane.showMessageDialog(myFrame, "Game Created! Your game ID is :");
+                            myFrame.show(myFrame.MENU);
+
+                        } else {
+                            JOptionPane.showMessageDialog(myFrame, "Game was not created");
+                        }
+
+
+                    }else if (event.getSource() == myFrame.getCreateGamePanel().getBtnBack()) {
+
+                        myFrame.show(myFrame.MENU);
+                    }
+
+                }
+            }
+
+
+        }
+
+
 
 
 

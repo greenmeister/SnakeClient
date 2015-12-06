@@ -17,8 +17,8 @@ public class CreateGamePanel extends JPanel {
     private JTextField textGameControls;
     private JTextField textMapSize;
     private JTextField textName;
+    private JTextField textOpponent;
     private JButton btnBack;
-    private JButton btnHowToPlay;
     private JButton btnCreate;
 
 
@@ -49,16 +49,18 @@ public class CreateGamePanel extends JPanel {
         labelName.setBounds(24, 237, 220, 44);
         add(labelName);
 
+
         textGameControls = new JTextField("");
-        textGameControls.setBounds(280, 120, 192, 34);
+        textGameControls.setBounds(266, 120, 230, 34);
         add(textGameControls);
 
+
         textMapSize = new JTextField("");
-        textMapSize.setBounds(280, 183, 192, 34);
+        textMapSize.setBounds(266, 183, 230, 34);
         add(textMapSize);
 
         textName = new JTextField("");
-        textName.setBounds(266, 231, 220, 56);
+        textName.setBounds(266, 253, 230, 34);
         add(textName);
 
         btnBack = new JButton("Back");
@@ -67,7 +69,7 @@ public class CreateGamePanel extends JPanel {
 
 
         btnCreate = new JButton("Create Game");
-        btnCreate.setBounds(280, 293, 192, 34);
+        btnCreate.setBounds(280, 418, 192, 34);
         add(btnCreate);
 
 
@@ -94,6 +96,7 @@ public class CreateGamePanel extends JPanel {
     }
 
     public JButton getBtnCreate() {return btnCreate;}
+
 
 
 

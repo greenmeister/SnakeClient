@@ -16,6 +16,7 @@ public class MyFrame extends JFrame {
     public static final String PLAY = "PLAY";
     public static final String JOIN = "JOIN";
     public static final String CREATE = "CREATE";
+    public static final String START = "START";
 
 
     private LoginPanel loginPanel;
@@ -28,10 +29,8 @@ public class MyFrame extends JFrame {
     private CardLayout c;
     private JPanel contentPane;
 
-    public MyFrame()
-    {
+    public MyFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
 
         contentPane = new JPanel();
@@ -62,7 +61,6 @@ public class MyFrame extends JFrame {
 
 
 
-
         setVisible(true);
         setResizable(false);
         setTitle("TheSnakeGame");
@@ -71,11 +69,13 @@ public class MyFrame extends JFrame {
         setBounds(300, 125, (int) SIZE.getWidth(), (int) SIZE.getHeight());
 
     }
+
     public void show(String card) {
         c.show(contentPane, card);
 
 
     }
+
     public MenuPanel getMenuPanel() {
         return menuPanel;
     }
@@ -84,19 +84,25 @@ public class MyFrame extends JFrame {
         return deleteGamePanel;
     }
 
-    public HighScorePanel getHighScorePanel(){
+    public HighScorePanel getHighScorePanel() {
         return highScorePanel;
     }
-    public PlaySnakePanel getPlaySnakePanel(){
-        return playSnakePanel;}
+
+    public PlaySnakePanel getPlaySnakePanel() {
+        return playSnakePanel;
+    }
 
     public JoinGamePanel getJoinGamePanel() {
-        return joinGamePanel;}
-    public LoginPanel getLoginPanel() {
-        return loginPanel;}
-    public CreateGamePanel getCreateGamePanel(){
-        return createGamePanel;}
+        return joinGamePanel;
+    }
 
+    public LoginPanel getLoginPanel() {
+        return loginPanel;
+    }
+
+    public CreateGamePanel getCreateGamePanel() {
+        return createGamePanel;
+    }
 
 }
 

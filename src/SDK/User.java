@@ -20,9 +20,10 @@ public class User {
     private String status;
     private String email;
     private int type;
+    private int userid;
+
     public User () {}
 
-    private int userid;
 
 
     //creating get and set method for all the variables, so they can be used by other classes
@@ -103,6 +104,7 @@ public class User {
     public int getUserid() {
         return userid;
     }
+
 
 
 }

@@ -7,13 +7,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+
 public class PlaySnakePanel extends JPanel {
     private JLabel lblPlaySnake;
     private JButton btnCreateGame;
     private JButton btnJoinGame;
     private JButton btnBack;
     private JButton btnHowToPlay;
-
     /**
      * Create the panel.
      */
@@ -40,6 +40,8 @@ public class PlaySnakePanel extends JPanel {
         btnBack = new JButton("Back");
         btnBack.setBounds(215, 304, 187, 41);
         add(btnBack);
+
+
     }
 
     public JButton getBtnJoinGame() {

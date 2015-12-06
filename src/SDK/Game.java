@@ -1,10 +1,11 @@
 package SDK;
 
+import java.sql.Date;
+
 /**
  * Created by Greenmeister on 01/12/15.
  */
 
-import java.sql.Date;
 
 
 public class Game {
