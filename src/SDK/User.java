@@ -7,10 +7,10 @@ package SDK;
 import java.sql.Date;
 
 
-
+/**Creating class User**/
 public class User {
 
-    //creating variables
+    /**creating variables**/
     private int id;
     private String firstName;
     private String lastName;
@@ -22,11 +22,11 @@ public class User {
     private int type;
     private int userid;
 
-    public User () {}
+    public User() {
+    }
 
 
-
-    //creating get and set method for all the variables, so they can be used by other classes
+    /**creating get and set method to be used by controller **/
 
 
     public int getId() {
@@ -104,7 +104,4 @@ public class User {
     public int getUserid() {
         return userid;
     }
-
-
-
 }
