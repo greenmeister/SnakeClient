@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 /**
  * Created by Greenmeister on 30/11/15.
  */
+
+    /**Create Jpanel class with J Componenets**/
 public class CreateGamePanel extends JPanel {
 
     private JLabel labelCreateGame;
@@ -17,17 +19,17 @@ public class CreateGamePanel extends JPanel {
     private JTextField textGameControls;
     private JTextField textMapSize;
     private JTextField textName;
-    private JTextField textOpponent;
     private JButton btnBack;
     private JButton btnCreate;
 
 
-
+        /**Creating the panel and adding J components to it**/
 
     public CreateGamePanel() {
         setLayout(null);
         setSize(new Dimension(700, 550));
 
+        /**Setting Names on the components, Setting their font and setting their bounds adding them to panel**/
 
         labelCreateGame = new JLabel("Create Game");
         labelCreateGame.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -75,12 +77,15 @@ public class CreateGamePanel extends JPanel {
 
     }
 
+    /**Created getters for the controller class**/
+
 
     public String getTextGameControls() {
         return textGameControls.getText();}
 
 
 
+    /**Parsing the int to to extract the value from the textField**/
     public int getTextMapSize() {
 
         return Integer.parseInt(textMapSize.getText());
@@ -100,6 +105,7 @@ public class CreateGamePanel extends JPanel {
 
 
 
+    /**Addding actionListener to JButtons**/
 
     public void addActionListener(ActionListener event) {
 

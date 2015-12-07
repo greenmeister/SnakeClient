@@ -8,17 +8,24 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 
+    /**Create Jpanel class with J Componenets**/
+
+
 public class PlaySnakePanel extends JPanel {
     private JLabel lblPlaySnake;
     private JButton btnCreateGame;
     private JButton btnJoinGame;
     private JButton btnBack;
     private JButton btnHowToPlay;
-    /**
-     * Create the panel.
-     */
-    public PlaySnakePanel() {
+
+
+        /**Creating the panel and adding J components to it**/
+
+        public PlaySnakePanel() {
         setLayout(null);
+
+            /**Setting Names on the components, Setting their font and setting their bounds adding them to panel**/
+
 
         lblPlaySnake = new JLabel("Play a game of Snake.");
         lblPlaySnake.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -44,6 +51,8 @@ public class PlaySnakePanel extends JPanel {
 
     }
 
+        /**Created getters for the controller class**/
+
     public JButton getBtnJoinGame() {
         return btnJoinGame;
     }
@@ -60,6 +69,8 @@ public class PlaySnakePanel extends JPanel {
         return btnHowToPlay;
     }
 
+
+        /**Addding actionListener to JButtons**/
 
     public void addActionListener(ActionListener event) {
 

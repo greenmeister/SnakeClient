@@ -8,7 +8,7 @@ import SDK.Score;
 
 
 
-
+    /**Creating JPanel class with J Components**/
 public class HighScorePanel extends JPanel {
 
 
@@ -16,11 +16,10 @@ public class HighScorePanel extends JPanel {
     private JButton btnBack;
     private JTable tblHighScore;
 
-    /**
-     * Create the panel.
-     */
+    /**Creating the panel and adding J components to it**/
     public HighScorePanel() {
         setLayout(null);
+
 
         lblHighScore = new JLabel("highscores of the games");
         lblHighScore.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -35,7 +34,9 @@ public class HighScorePanel extends JPanel {
 
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(20, 60, 400, 300);
-        add(scrollPane);
+
+
+        /**Creating a JTabel which will contain a row with username and score**/
 
         tblHighScore = new JTable((new DefaultTableModel(new Object[]{"username", "score"}, 0)));
         scrollPane.setViewportView(tblHighScore);
@@ -44,6 +45,8 @@ public class HighScorePanel extends JPanel {
 
     }
 
+
+        /**getters for controller class**/
 
 
     public JButton getBtnBack() {

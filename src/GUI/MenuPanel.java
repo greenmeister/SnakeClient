@@ -12,6 +12,7 @@ import java.io.IOException;
  * Created by Greenmeister on 26/11/15.
  */
 
+/**Creating JPanel class with J Components**/
 
 public class MenuPanel extends JPanel {
 
@@ -21,33 +22,44 @@ public class MenuPanel extends JPanel {
     private JButton btnLogout;
     private JLabel Background;
 
-    /**
-     * Create the panel.
-     */
+    /**Creating the panel and adding J components to it**/
+
     public MenuPanel() {
 
+        /**Setting Names on the components, Setting their font and setting their bounds adding them to panel**/
 
         setLayout(null);
         setSize(700, 550);
 
 
         btnPlaySnake = new JButton("Play Snake");
+        btnPlaySnake.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
         btnPlaySnake.setBounds(208, 142, 255, 41);
         add(btnPlaySnake);
 
         btnHighscores = new JButton("Highscores");
+        btnHighscores.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
         btnHighscores.setBounds(208, 197, 255, 41);
         add(btnHighscores);
 
         btnDeleteGame = new JButton("Delete game");
+        btnDeleteGame.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
         btnDeleteGame.setBounds(208, 250, 255, 41);
         add(btnDeleteGame);
 
         btnLogout = new JButton("Logout");
+        btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
         btnLogout.setBounds(208, 486, 255, 41);
         add(btnLogout);
 
-        try // tries to load image
+
+        /**Adding background image**/
+
+        try /**Tries to load image **/
         {
             BufferedImage img = ImageIO.read(this.getClass().getResource("/Pictures/snake.jpg")); // loads image from package image images
             Background = new JLabel(""); // creates label without text
@@ -61,7 +73,8 @@ public class MenuPanel extends JPanel {
         }
 
 
-    }
+    }    /**Created getters for the controller class**/
+
 
     public JButton getBtnPlaySnake() {
         return btnPlaySnake;
@@ -78,6 +91,8 @@ public class MenuPanel extends JPanel {
     public JButton getBtnLogout() {
         return btnLogout;
     }
+
+    /**Addding actionListener to JButtons**/
 
     public void addActionListener(ActionListener event) {
 

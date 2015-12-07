@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 
 
-
+        /**Creating JPanel class with J Components**/
 public class DeleteGamePanel extends JPanel {
     private JLabel lblDeleteGame;
     private JLabel lblInsertGameId;
@@ -23,10 +23,11 @@ public class DeleteGamePanel extends JPanel {
     private JLabel Background;
 
 
-    /**
-     * Create the panel.
-     */
+     /**Creating the panel and adding J components to it**/
     public DeleteGamePanel() {
+
+        /**Setting Names on the components, Setting their font and setting their bounds adding them to panel**/
+
 
         setLayout(null);
         setSize(700, 550);
@@ -54,19 +55,23 @@ public class DeleteGamePanel extends JPanel {
         btnBack.setBounds(274, 475, 171, 41);
         add(btnBack);
 
-        try // tries to load image
+        /**Adding background image**/
+
+        try /** tries to load image **/
         {
             BufferedImage img = ImageIO.read(this.getClass().getResource("/Pictures/delete.jpg"));
             Background = new JLabel("");
             Background.setIcon(new ImageIcon(img));
             Background.setBounds(0, 0, 700, 550);
             add(Background);
-        } // try ends
+        }
         catch (IOException ex) {
 
         }
 
     }
+
+            /**getters  for the controller class**/
 
     public int getGameID() {
         return Integer.parseInt(gameID.getText());
@@ -80,6 +85,7 @@ public class DeleteGamePanel extends JPanel {
         return btnBack;
     }
 
+            /**Adding actionlistner to Jbutton**/
     public void addActionListener(ActionListener event) {
 
         btnDelete.addActionListener(event);

@@ -6,6 +6,8 @@ import java.awt.*;
 /**
  * Created by Greenmeister on 25/11/15.
  */
+
+    //Creating class with final strings and J components
 public class MyFrame extends JFrame {
 
     public static final Dimension SIZE = new Dimension(700, 550);
@@ -16,7 +18,6 @@ public class MyFrame extends JFrame {
     public static final String PLAY = "PLAY";
     public static final String JOIN = "JOIN";
     public static final String CREATE = "CREATE";
-    public static final String START = "START";
 
 
     private LoginPanel loginPanel;
@@ -29,9 +30,12 @@ public class MyFrame extends JFrame {
     private CardLayout c;
     private JPanel contentPane;
 
+
+    //Creating the frame in the Constructor.
     public MyFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        //Creating ContentPane which I add the other Jpanels on.
 
         contentPane = new JPanel();
         setContentPane(contentPane);
@@ -60,25 +64,28 @@ public class MyFrame extends JFrame {
         contentPane.add(createGamePanel, CREATE);
 
 
-
+        //makes sure that JFrame will be visible when starting program
         setVisible(true);
+        //cannot rezise the frame
         setResizable(false);
+        //Setting the title on the frame
         setTitle("TheSnakeGame");
 
-
+            //setting the bounds of the frame
         setBounds(300, 125, (int) SIZE.getWidth(), (int) SIZE.getHeight());
 
     }
 
+    //method which is used in controller class to show the various JPanels that corresponds to users actions
     public void show(String card) {
         c.show(contentPane, card);
 
 
     }
 
-    public MenuPanel getMenuPanel() {
-        return menuPanel;
-    }
+    //Getters and setters for the controller class to use
+
+    public MenuPanel getMenuPanel() {return menuPanel;}
 
     public DeleteGamePanel getDeleteGamePanel() {
         return deleteGamePanel;

@@ -11,6 +11,7 @@ import java.io.IOException;
  * Created by Greenmeister on 25/11/15.
  */
 
+    /**Create Jpanel class with J Componenets**/
     public class LoginPanel extends JPanel {
 
     private JButton btnLogin;
@@ -21,13 +22,18 @@ import java.io.IOException;
     private JLabel Background;
 
 
+        /**Creating the panel and adding J components to it**/
+
     public LoginPanel() {
         setLayout(null);
         setSize(MyFrame.SIZE);
 
+        /**Setting Names on the components, Setting their font and setting their bounds adding them to panel**/
+
 
         LabelUserName = new JLabel("Username:");
         LabelUserName.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        /**Changing the color of the Label to match with background picture**/
         LabelUserName.setForeground(new Color(255, 228, 181));
         LabelUserName.setBounds(207, 101, 102, 34);
         add(LabelUserName);
@@ -39,6 +45,7 @@ import java.io.IOException;
 
         LabelPassword = new JLabel("Password:");
         LabelPassword.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        /**Changing the color of the Label to match with background picture**/
         LabelPassword.setForeground(new Color(255, 228, 181));
         LabelPassword.setBounds(207, 158, 95, 34);
         add(LabelPassword);
@@ -53,7 +60,10 @@ import java.io.IOException;
         add(btnLogin);
 
 
-        try {
+        /**Adding backgrond image**/
+
+        try { /** tries to load image **/
+
             BufferedImage img = ImageIO.read(this.getClass().getResource("/Pictures/snake.jpg"));
             Background = new JLabel("");
             Background.setIcon(new ImageIcon(img));
@@ -64,6 +74,7 @@ import java.io.IOException;
         }
 
     }
+        /**Addding actionListener to JButtons**/
 
     public void addActionListener(ActionListener event) {
 
@@ -71,6 +82,7 @@ import java.io.IOException;
 
 
     }
+        /**Created getters for the controller class**/
 
     public JButton getBtnLogin() {
         return btnLogin;

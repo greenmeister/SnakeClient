@@ -4,13 +4,14 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 
 /**
  * Created by Greenmeister on 27/11/15.
  */
 
+
+    /**Creating JPanel class with J Components**/
 public class JoinGamePanel extends JPanel {
     private JLabel lblJoinGame;
     private JLabel lblSearchForGame;
@@ -20,12 +21,12 @@ public class JoinGamePanel extends JPanel {
     private JTextField  textFieldGameID;
     private JTextField textFieldOppControls;
 
-    /**
-     * Create the panel.
-     */
+
+        /**Creating the panel and adding J components to it**/
     public JoinGamePanel() {
 
 
+        /**Setting Names on the components, Setting their font and setting their bounds and adding them to panel**/
         setLayout(null);
 
         lblJoinGame = new JLabel("JOIN GAME");
@@ -62,6 +63,7 @@ public class JoinGamePanel extends JPanel {
         add(btnBack);
 
     }
+        /**getters for controller class**/
 
     public JButton getBtnBack() {
         return btnBack;
@@ -81,7 +83,7 @@ public class JoinGamePanel extends JPanel {
 
 
 
-
+        /**Adding actionlistner to Jbutton**/
     public void addActionListener(ActionListener event){
 
         btnBack.addActionListener(event);
