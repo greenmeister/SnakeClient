@@ -1,21 +1,27 @@
 package Run;
 
 /**
- * Created by Greenmeister on 25/11/15.
+ * Created by Greenmeister on 08/12/15.
  */
 
-import GUI.GUITESTCLASS;
+import Logic.Controller;
 
 public class Main {
 
-    public static void main(String args[]) {
+    /**Main method that starts the client
+     * makes an instance of controller and starts the run method which injects the actionListeners
+     * @param args
+     */
+    public static void main(String[] args) {
 
-        new GUITESTCLASS();
+        Controller controller = new Controller();
+        controller.run();
+
     }
-
-
-
-
-
 }
+
+
+
+
+
 

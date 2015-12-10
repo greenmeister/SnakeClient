@@ -26,7 +26,6 @@ import java.io.IOException;
 
     public LoginPanel() {
         setLayout(null);
-        setSize(MyFrame.SIZE);
 
         /**Setting Names on the components, Setting their font and setting their bounds adding them to panel**/
 
@@ -56,11 +55,12 @@ import java.io.IOException;
 
 
         btnLogin = new JButton("Login");
+        btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 20));
         btnLogin.setBounds(215, 438, 262, 41);
         add(btnLogin);
 
 
-        /**Adding backgrond image**/
+        /**Adding background image**/
 
         try { /** tries to load image **/
 

@@ -19,13 +19,21 @@ public class Game {
     private Gamer opponent;
     private Date created;
     private int mapSize;
+    private String status;
+
+
+
+
 
     public Game(){}
 
-    /**creating get and set method to be used by controller **/
+    /**creating get and set method to be used by other classes**/
 
     public Date getCreated() {
         return created;
+    }
+    public Gamer getHost() {
+        return host;
     }
 
     public void setCreated(Date created) {
@@ -63,5 +71,14 @@ public class Game {
         this.opponent = opponent;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+
+
 
 }
+
+
+

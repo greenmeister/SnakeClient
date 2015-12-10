@@ -7,7 +7,9 @@ import java.awt.*;
  * Created by Greenmeister on 25/11/15.
  */
 
-    //Creating class with final strings and J components
+    /**Creating class with final strings and J components. The final strings are used in controller class to show the proper JPanels
+     * also used to add Panels to contentPane**/
+
 public class MyFrame extends JFrame {
 
     public static final Dimension SIZE = new Dimension(700, 550);
@@ -18,6 +20,8 @@ public class MyFrame extends JFrame {
     public static final String PLAY = "PLAY";
     public static final String JOIN = "JOIN";
     public static final String CREATE = "CREATE";
+    public static final String MYGAMES = "MYGAMES";
+    public static final String SCORES = "SCORES";
 
 
     private LoginPanel loginPanel;
@@ -27,15 +31,18 @@ public class MyFrame extends JFrame {
     private PlaySnakePanel playSnakePanel;
     private JoinGamePanel joinGamePanel;
     private CreateGamePanel createGamePanel;
+    private CreatedGamesPanel createdGamesPanel;
+    private UserScoresPanel userScoresPanel;
+        /**Chose CardLayout for GUI **/
     private CardLayout c;
     private JPanel contentPane;
 
 
-    //Creating the frame in the Constructor.
+    /**Creating the frame in the Constructor. **/
     public MyFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Creating ContentPane which I add the other Jpanels on.
+        /**Creating ContentPane on which the JPanels are attached**/
 
         contentPane = new JPanel();
         setContentPane(contentPane);
@@ -63,27 +70,33 @@ public class MyFrame extends JFrame {
         createGamePanel = new CreateGamePanel();
         contentPane.add(createGamePanel, CREATE);
 
+        createdGamesPanel = new CreatedGamesPanel();
+        contentPane.add(createdGamesPanel, MYGAMES);
 
-        //makes sure that JFrame will be visible when starting program
+        userScoresPanel = new UserScoresPanel();
+        contentPane.add(userScoresPanel, SCORES);
+
+
+        /**makes sure that JFrame will be visible when starting program**/
         setVisible(true);
-        //cannot rezise the frame
+        /**cannot rezise the frame**/
         setResizable(false);
-        //Setting the title on the frame
+        /**Setting the title on the frame**/
         setTitle("TheSnakeGame");
 
-            //setting the bounds of the frame
+            /**setting the bounds of the frame**/
         setBounds(300, 125, (int) SIZE.getWidth(), (int) SIZE.getHeight());
 
     }
 
-    //method which is used in controller class to show the various JPanels that corresponds to users actions
+    /**method which is used in controller class to show the various JPanels that corresponds to users actions**/
     public void show(String card) {
         c.show(contentPane, card);
 
 
     }
 
-    //Getters and setters for the controller class to use
+    /**Getters  for the controller class to use**/
 
     public MenuPanel getMenuPanel() {return menuPanel;}
 
@@ -110,6 +123,10 @@ public class MyFrame extends JFrame {
     public CreateGamePanel getCreateGamePanel() {
         return createGamePanel;
     }
+
+    public CreatedGamesPanel getCreatedGamesPanel(){return createdGamesPanel;}
+
+    public UserScoresPanel getUserScoresPanel(){return userScoresPanel;}
 
 }
 

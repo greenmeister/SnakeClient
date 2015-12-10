@@ -4,7 +4,7 @@ package SDK;
  * Created by Greenmeister on 01/12/15.
  */
 
-/**Creating class Gamer**/
+/**Creating class Gamer - Extends User**/
 public class Gamer extends User {
 
     /**creating variables**/
@@ -14,7 +14,7 @@ public class Gamer extends User {
     private String controls;
     private boolean winner;
 
-    /**creating get and set method to be used by controller **/
+    /**creating get and set method to be used by other classes **/
 
     public boolean isWinner() {
         return winner;

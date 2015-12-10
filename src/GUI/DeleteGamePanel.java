@@ -48,10 +48,12 @@ public class DeleteGamePanel extends JPanel {
         gameID.setColumns(10);
 
         btnDelete = new JButton("Delete");
+        btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnDelete.setBounds(274, 368, 171, 41);
         add(btnDelete);
 
         btnBack = new JButton("Back");
+        btnBack.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnBack.setBounds(274, 475, 171, 41);
         add(btnBack);
 

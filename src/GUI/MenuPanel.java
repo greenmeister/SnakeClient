@@ -21,7 +21,6 @@ public class MenuPanel extends JPanel {
     private JButton btnDeleteGame;
     private JButton btnLogout;
     private JLabel Background;
-
     /**Creating the panel and adding J components to it**/
 
     public MenuPanel() {
@@ -34,29 +33,27 @@ public class MenuPanel extends JPanel {
 
         btnPlaySnake = new JButton("Play Snake");
         btnPlaySnake.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
         btnPlaySnake.setBounds(208, 142, 255, 41);
         add(btnPlaySnake);
 
         btnHighscores = new JButton("Highscores");
         btnHighscores.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
         btnHighscores.setBounds(208, 197, 255, 41);
         add(btnHighscores);
 
         btnDeleteGame = new JButton("Delete game");
         btnDeleteGame.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
         btnDeleteGame.setBounds(208, 250, 255, 41);
         add(btnDeleteGame);
 
         btnLogout = new JButton("Logout");
         btnLogout.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
         btnLogout.setBounds(208, 486, 255, 41);
         add(btnLogout);
 
 
+
+     
         /**Adding background image**/
 
         try /**Tries to load image **/
@@ -92,6 +89,8 @@ public class MenuPanel extends JPanel {
         return btnLogout;
     }
 
+
+
     /**Addding actionListener to JButtons**/
 
     public void addActionListener(ActionListener event) {
@@ -100,6 +99,7 @@ public class MenuPanel extends JPanel {
         btnHighscores.addActionListener(event);
         btnLogout.addActionListener(event);
         btnPlaySnake.addActionListener(event);
+
 
     }
 }
