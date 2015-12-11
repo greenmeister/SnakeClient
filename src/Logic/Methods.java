@@ -117,15 +117,15 @@ import javax.swing.*;
      * @return null if there is an exception, else it returns gamer as an array. Winner and Score of the gamer array is then extracted. This is placed in a table in UserScoresPanel
      */
 
-    public Gamer[] myScores(int userId) {
+    public Score[] myScores(int userId) {
         String response;
         try {
             response = con.get("scores/" + userId);
         } catch (Exception ex) {
             return null;
         }
-        Gamer[] gamer = new Gson().fromJson(response, Gamer[].class);
-        return gamer;
+        Score[] scores = new Gson().fromJson(response, Score[].class);
+        return scores;
     }
 
     /** Method that take game object as parameter. Method will try to create a game with the object. Sending the request to server via POST method

@@ -260,14 +260,14 @@ public class Controller {
 
                 int userId = LoggedInUser.getId();
 
-                Gamer[] gamer = method.myScores(userId);
+                Score[] scores = method.myScores(userId);
                 myFrame.getUserScoresPanel();
                 myFrame.show(MyFrame.SCORES);
 
                 /**scoresTable method from UserScoresPanel is then called, takes the gamer array as parameter and the
                  * scoresTable method will populate the table with results
                  */
-                myFrame.getUserScoresPanel().scoresTable(gamer);
+                myFrame.getUserScoresPanel().scoresTable(scores);
 
 
             }
@@ -330,6 +330,7 @@ public class Controller {
                 }
                 /** if user presses button back user will be redirected back to PlaySnake Panel**/
             } else if (event.getSource() == myFrame.getJoinGamePanel().getBtnBack()) {
+
 
                 myFrame.show(myFrame.PLAY);
 
@@ -395,6 +396,7 @@ public class Controller {
 
             } else if (event.getSource() == myFrame.getCreateGamePanel().getBtnBack()) {
                     /** If button back is pressed user is redirected back to PlaySnake Panel**/
+
                 myFrame.show(myFrame.PLAY);
             }
 
