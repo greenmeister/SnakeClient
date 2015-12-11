@@ -1,6 +1,9 @@
 package GUI;
 
+import SDK.Game;
 import SDK.Gamer;
+import SDK.Score;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -40,7 +43,7 @@ public class UserScoresPanel extends JPanel {
 
 
 
-            tblScores = new JTable(new DefaultTableModel(new Object[]{"Winner","Score"}, 0));
+            tblScores = new JTable(new DefaultTableModel(new Object[]{"Winner","Score", "GameID"}, 0));
             scrollPane.setViewportView(tblScores);
         }
 
@@ -65,11 +68,11 @@ public class UserScoresPanel extends JPanel {
      * Takes an array of the class Gamer as parameter calling it gamers. Then loops through scores and populates the table**/
 
 
-    public void scoresTable(Gamer[] gamers) {
+    public void scoresTable(Score[] scores) {
         DefaultTableModel model = (DefaultTableModel) tblScores.getModel();
 
-        for (Gamer gamer : gamers) {
-            model.addRow(new Object[]{gamer.isWinner(), gamer.getScore()});
+        for (Score score : scores) {
+            model.addRow(new Object[]{score.getUser().isWinner(),  score.getScore(), score.getGame().getGameId()});
 
         }
 
